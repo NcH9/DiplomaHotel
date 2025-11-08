@@ -7,9 +7,9 @@ This is a Laravel / Vue application for my diploma
 
 ## How to install this (don't)
 
-- **Backend**
-'COMING SOON...'
+- **Backend** </br>
+'COMING SOON...' </br>
 
-- **Frontend**
-cd frontend
-npm install
+- **Frontend** </br>
+cd frontend </br>
+npm install </br>
