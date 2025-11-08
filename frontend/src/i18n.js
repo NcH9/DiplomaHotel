@@ -9,4 +9,4 @@ export const i18n = createI18n({
     locale: savedLang,
     fallbackLocale: 'uk',
     messages: { en, uk }
-})
+});
