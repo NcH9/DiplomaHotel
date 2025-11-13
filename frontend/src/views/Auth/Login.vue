@@ -1,30 +1,41 @@
 <template>
     <div class="grid1">
-    <h2 class="flex_center">Login</h2>
-    <form @submit.prevent="validateForm" class="login">
-        <div class="grid1">
-            <div class="flex_center">
-                <label for="email">Email:</label>
-                <input type="email" id="email" v-model.lazy="form.email" @blur="validateEmail(form.email)" />
-            </div>
-            <span class="error" v-if="error.email">{{ error.email }}</span>
-        </div>
+        <h2 class="flex_center">{{ $t('auth.login') }}</h2>
+        
+        <el-form
+            :model="form"
+            :rules="rules"
+            ref="loginForm"
+            label-position="top"
+            class="login"
+            @submit.native.prevent="validateForm"
+        >
+            <el-form-item :label="$t('auth.email')">
+                <el-input
+                    v-model.lazy="form.email"
+                    type="email"
+                    @blur="validateEmail"
+                ></el-input>
+                <p class="error" v-if="error.email">{{ error.email }}</p>
+            </el-form-item>
 
-        <div class="grid1">
-            <div class="flex_center">
-                <label for="password">Password:</label>
-                <input type="password" id="password" v-model.lazy="form.password" @blur="validatePassword(form.password)"/>
-            </div>
-            <span class="error" v-if="error.password">{{ error.password }}</span>
-        </div>
+            <el-form-item :label="$t('auth.password')">
+                <el-input
+                    v-model.lazy="form.password"
+                    type="password"
+                    @blur="validatePassword"
+                ></el-input>
+                <p class="error" v-if="error.password">{{ error.password }}</p>
+            </el-form-item>
 
-        <div class="flex_center">
-            <button id="loginbtn" type="submit">Login</button>
-        </div>
-        <p class="error" v-if="errorMsg">{{ errorMsg }}</p>
-        <p class="success" v-if="successMessage">{{ successMessage }}</p>
-    </form>
-  </div>
+            <el-form-item>
+                <el-button type="primary" @click="validateForm">{{ $t('auth.action_login') }}</el-button>
+            </el-form-item>
+
+            <p class="error" v-if="errorMsg">{{ errorMsg }}</p>
+            <p class="success" v-if="successMessage">{{ successMessage }}</p>
+        </el-form>
+    </div>
 </template>
 
 <script>
@@ -48,6 +59,7 @@ export default {
             resetError();
             validateEmail(form.value.email);
             validatePassword(form.value.password);
+            console.log(error.value)
             if (!error.value.email && !error.value.password){
                 loginUser();
             }
