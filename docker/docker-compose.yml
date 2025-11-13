@@ -1,7 +1,7 @@
-# version: '3.7'
 services:
   nginx:
     image: nginx:latest
+    container_name: diploma_nginx
     ports:
       - "8080:80"
     volumes:
@@ -10,7 +10,9 @@ services:
     depends_on:
       - php
       - mysql
+
   php:
+    container_name: diploma_php
     build:
       context: .
       dockerfile: php.dockerfile
@@ -19,7 +21,9 @@ services:
     depends_on:
       - mysql
       - redis
+
   mysql:
+    container_name: diploma_db
     image: mysql:latest
     restart: unless-stopped
     environment:
@@ -31,18 +35,23 @@ services:
       - "3306:3306"
     volumes:
       - mysqldata:/var/lib/mysql
+
   redis:
+    container_name: diploma_redis
     image: redis:alpine
     ports:
       - "6379:6379"
+
   composer:
+    container_name: diploma_composer
     image: composer:latest
     volumes:
       - .:/app
     command: composer install --ignore-platform-reqs
+  
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
-    container_name: my-phpmyadmin
+    container_name: diploma_phpmyadmin
     restart: unless-stopped
     ports:
       - "8081:80"
@@ -51,5 +60,6 @@ services:
       PMA_PORT: 3306
       PMA_USER: laravel
       PMA_PASSWORD: secret
+
 volumes:
   mysqldata:
