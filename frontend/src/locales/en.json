@@ -96,6 +96,8 @@
     "info": "Your Account Info",
     "email": "Email",
     "username": "Username",
+    "password": "Password",
+    "action_login": "Log in",
     "roles": {
       "label": "Roles",
       "admin": "Admin",
