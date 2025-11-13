@@ -8,7 +8,7 @@ This is a Laravel / Vue application for my diploma
 ## How to install this (don't)
 
 - **Backend (!DOCKER REQUIRED!)** </br>
-cd docker
+cd docker </br>
 docker compose build </br>
 docker compose up -d </br>
 docker run --rm -v $(pwd):/app composer install </br>
